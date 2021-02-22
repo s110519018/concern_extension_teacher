@@ -7,7 +7,12 @@ var body=document.getElementsByTagName('body')[0];
 var insert_script = document.createElement("script");
 insert_script.innerHTML = 'var red_c=0; var green_c=0; var yellow_c=0;'+
 
-'window.setInterval("StudentData()", 1000);'+
+'window.addEventListener("message",function(me) {  '+
+      'console.log("me.data.isClassing"+me.data.isClassing);'+
+      'if(me.data.isClassing){var load_StudentData = window.setInterval("StudentData()", 1000);}'+
+      'else{ clearInterval(load_StudentData);}'+
+'});'+
+
 'var StudentData = () => {'+
   'const url = window.location.pathname.substr(1);'+
   '$.ajax({'+
@@ -194,24 +199,20 @@ function start(name) {
           console.log("成功");
       },
       error: function(XMLHttpRequest){
-        console.log("失敗"+XMLHttpRequest.responseText);
+        console.log(XMLHttpRequest.responseText);
       }
   });
     body.appendChild(barchart_css);
     body.appendChild(barchart);
     body.appendChild(insert_script);
+    window.postMessage({isClassing:true});
+
+      
   }
 
 }
-
 function end(){
-  console.log("下課");
-  insert_script.remove();
-  barchart.remove();
-  barchart_css.remove();
-  var end_script = document.createElement("script");
-  end_script.innerHTML='window.drawChart=undefined;window.StudentData=undefined;window.calltest=undefined;';
-  body.appendChild(end_script);
+
   const url = window.location.pathname.substr(1);
   var today=new Date();
   var currentDateTime =today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
@@ -224,11 +225,17 @@ function end(){
       "classroomID":url,
 	    "endTime": currentDateTime 
     }),
-    success: function (msg) {
-        console.log(msg);
+    success: function (XMLHttpRequest) {
+        console.log(XMLHttpRequest.responseText);
+        window.postMessage({isClassing:false});
+        barchart.remove();
+        barchart_css.remove();
     },
-    error: function(error){
-      console.log(error)
+    error: function(XMLHttpRequest){
+      console.log("下課失敗");
+      window.postMessage({isClassing:false});
+        barchart.remove();
+        barchart_css.remove();
     }
   });
   
