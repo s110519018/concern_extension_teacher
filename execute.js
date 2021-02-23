@@ -7,23 +7,32 @@ var body=document.getElementsByTagName('body')[0];
 var insert_script = document.createElement("script");
 insert_script.innerHTML = 'var red_c=0; var green_c=0; var yellow_c=0;'+
 
-'window.setInterval("StudentData()", 1000);'+
+'var isClassing=false;'+
+'window.addEventListener("message",function(me) {  '+
+      'console.log("me.data.isClassing"+me.data.isClassing);'+
+      'if(me.data.isClassing){isClassing=me.data.isClassing;setTimeout(StudentData, 1000);}'+
+      'else{isClassing=me.data.isClassing;}'+
+'});'+
+
 'var StudentData = () => {'+
-  'const url = window.location.pathname.substr(1);'+
-  '$.ajax({'+
-    'type: "POST",'+
-    'contentType: "application/json",'+
-    'url: "https://concern-backendserver.herokuapp.com/api/teacher/getAllNewData",'+
-    'data: JSON.stringify({'+
-      '"classroomID": url'+
-    '}),'+
-    'success: function (data) {'+
-      'calltest(data);'+
-    '},'+
-    'error: function (XMLHttpRequest) {'+
-      'console.log("error"+XMLHttpRequest.responseText);'+
-    '}'+
-  '});'+
+  'if(isClassing){'+
+    'const url = window.location.pathname.substr(1);'+
+    '$.ajax({'+
+      'type: "POST",'+
+      'contentType: "application/json",'+
+      'dataType: "text",'+
+      'url: "https://concern-backendserver.herokuapp.com/api/teacher/getAllNewData",'+
+      'data: JSON.stringify({'+
+        '"classroomID": url'+
+      '}),'+
+      'success: function (data) {'+
+        'calltest(data);'+
+      '},'+
+      'error: function (XMLHttpRequest) {'+
+        'console.log("error"+XMLHttpRequest.responseText);'+
+      '}'+
+    '});'+
+  '}'+
 '};'+
 
 
@@ -75,7 +84,7 @@ insert_script.innerHTML = 'var red_c=0; var green_c=0; var yellow_c=0;'+
 
   'google.charts.load("current", {packages:["corechart"]});'+
   'google.charts.setOnLoadCallback(drawChart);'+
-
+  'setTimeout(StudentData, 1000);'+
 '}'+
 
 'function drawChart() {'+
@@ -184,17 +193,19 @@ function start(name) {
     $.ajax({
       type:"POST",
       contentType: 'application/json',
-      dataType: "json",
+      dataType: "text",
       url: "https://concern-backendserver.herokuapp.com/api/teacher/startClass",
       data: JSON.stringify({
         "classroomID": url,
         "startTime": currentDateTime
       }),
-      success: function() {
-          console.log("成功");
+      success: function(data) {
+          console.log("成功"+data);
+          window.postMessage({isClassing:true});
+          chrome.runtime.sendMessage({isClassing:true});
       },
       error: function(XMLHttpRequest){
-        console.log("失敗"+XMLHttpRequest.responseText);
+        console.log(XMLHttpRequest.responseText);
       }
   });
     body.appendChild(barchart_css);
@@ -203,32 +214,28 @@ function start(name) {
   }
 
 }
-
 function end(){
-  console.log("下課");
-  insert_script.remove();
-  barchart.remove();
-  barchart_css.remove();
-  var end_script = document.createElement("script");
-  end_script.innerHTML='window.drawChart=undefined;window.StudentData=undefined;window.calltest=undefined;';
-  body.appendChild(end_script);
   const url = window.location.pathname.substr(1);
   var today=new Date();
   var currentDateTime =today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
   $.ajax({
     type:"POST",
     contentType: 'application/json',
-    dataType: "json",
+    dataType: "text",
     url: "https://concern-backendserver.herokuapp.com/api/teacher/endClass",
     data: JSON.stringify({ 
       "classroomID":url,
 	    "endTime": currentDateTime 
     }),
-    success: function (msg) {
-        console.log(msg);
+    success: function (data) {
+        console.log(data);
+        window.postMessage({isClassing:false});
+        chrome.runtime.sendMessage({isClassing:false});
+        barchart.remove();
+        barchart_css.remove();
     },
-    error: function(error){
-      console.log(error)
+    error: function(XMLHttpRequest){
+      console.log(XMLHttpRequest.responseText);
     }
   });
   
