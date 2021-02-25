@@ -41,3 +41,16 @@ button:focus{
 #is_classing,#not_classing{
   display: none;
 }
+#reload{
+  background-color: transparent;
+  color: rgb(155, 152, 152);
+  border:0;
+  border-radius: 0px;
+  font-weight: normal;
+  padding: 0px;
+  margin-top: 10px;
+  outline: 0;
+  cursor: pointer;
+  font-size:12px;
+  transform: scale(0.916);/*11/12=0.916, font-size:11px*/
+}

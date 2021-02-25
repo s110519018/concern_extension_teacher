@@ -11,6 +11,9 @@ var getSelectedTab = (tab) => {
     window.close();
     // chrome.runtime.reload();
   });
+  document.getElementById('reload').addEventListener('click', () => {
+    chrome.runtime.reload();
+  });
 }
 chrome.tabs.getSelected(null, getSelectedTab);
 
