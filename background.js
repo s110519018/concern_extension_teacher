@@ -1,5 +1,5 @@
-// var isClassing=0;
-var isClassing=false;
+var isClassing=2;
+// var isClassing=false;
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     // if (request.msg === "sendtoPOPUP") {
     //     sendResponse({isClassing: isClassing});

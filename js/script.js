@@ -37,13 +37,28 @@ chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {   
     if (request.msg === "sendtoPOPUP") {
       document.getElementById('loading').textContent="";
-      if (request.data.isClassing){
-        document.getElementById('not_classing').style.display='none';
-        document.getElementById('is_classing').style.display='block';
+      switch(request.data.isClassing){
+        case 0:
+          document.getElementById('loading').textContent="loading...";
+          document.getElementById('is_classing').style.display='none';
+          document.getElementById('not_classing').style.display='none';
+          break;
+        case 1:
+          document.getElementById('not_classing').style.display='none';
+          document.getElementById('is_classing').style.display='block';
+          break;
+        case 2:
+          document.getElementById('is_classing').style.display='none';
+          document.getElementById('not_classing').style.display='block';
+          break;
       }
-      else{
-        document.getElementById('is_classing').style.display='none';
-        document.getElementById('not_classing').style.display='block';
-      }
+      // if (request.data.isClassing==1){
+      //   document.getElementById('not_classing').style.display='none';
+      //   document.getElementById('is_classing').style.display='block';
+      // }
+      // else if(request.data.isClassing==2){
+      //   document.getElementById('is_classing').style.display='none';
+      //   document.getElementById('not_classing').style.display='block';
+      // }
     } 
 });

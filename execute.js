@@ -186,6 +186,7 @@ function start(name) {
     alert("請填入Google Meet名字");
   }
   else {
+    chrome.runtime.sendMessage({isClassing:0});
     console.log("開始上課");
     const url = window.location.pathname.substr(1);
     var today=new Date();
@@ -202,7 +203,7 @@ function start(name) {
       success: function(data) {
           console.log("成功"+data);
           window.postMessage({isClassing:true});
-          chrome.runtime.sendMessage({isClassing:true});
+          chrome.runtime.sendMessage({isClassing:1});
       },
       error: function(XMLHttpRequest){
         console.log(XMLHttpRequest.responseText);
@@ -219,6 +220,7 @@ function start(name) {
 
 }
 function end(){
+  chrome.runtime.sendMessage({isClassing:0});
   const url = window.location.pathname.substr(1);
   var today=new Date();
   var currentDateTime =today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
@@ -234,7 +236,7 @@ function end(){
     success: function (data) {
         console.log(data);
         window.postMessage({isClassing:false});
-        chrome.runtime.sendMessage({isClassing:false});
+        chrome.runtime.sendMessage({isClassing:2});
         barchart.remove();
         barchart_css.remove();
         document.querySelector('.U26fgb.JRY2Pb.mUbCce.kpROve.GaONte.Qwoy0d.ZPasfd.vzpHY').setAttribute('aria-disabled', false);
