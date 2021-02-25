@@ -38,6 +38,6 @@ button:focus{
   background-color: #000;
   color: #A0E557;
 }
-#is_classing{
+#is_classing,#not_classing{
   display: none;
 }

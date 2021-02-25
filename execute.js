@@ -163,7 +163,7 @@ insert_script.innerHTML = 'var red_c=0; var green_c=0; var yellow_c=0;'+
 
 //barchart
 var barchart = document.createElement('div');
-barchart.innerHTML='<div id="barchart" class="barchart"><div style="position: absolute;right: 20px;top: 20px;cursor: pointer;"><div style="width: 20px;height: 20px;" id="hide"><svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 2.14275L12.857 0L7.5 5.35725L2.14275 0L0 2.14275L5.357 7.5L0 12.8573L2.14275 15L7.5 9.64275L12.857 15L15 12.8573L9.6425 7.5L15 2.14275Z" fill="#E5E5E5"/></svg></div></div><div id="barchart_values" style="display:flex;align-items: center;justify-content: center;width: auto; height: 300px;"></div></div><div style="z-index:150;position: fixed;right: 20px;bottom: 20px;cursor: pointer;" id="show"><svg width="75" height="75" viewBox="0 0 75 75" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="37.5" cy="37.5" r="35" fill="#5C5A5B" stroke="#35373A" stroke-width="5"/><path d="M55.0072 55.5723V23.2681H43.2602V55.5723H37.3867V35.0151H25.6397V55.5723H21.2346V17.3946H18.2979V55.5723C18.2979 56.3512 18.6073 57.0981 19.158 57.6489C19.7088 58.1996 20.4557 58.509 21.2346 58.509H59.4123V55.5723H55.0072ZM34.45 55.5723H28.5765V37.9518H34.45V55.5723ZM52.0704 55.5723H46.1969V26.2048H52.0704V55.5723Z" fill="white"/></svg></div>';
+barchart.innerHTML='<div id="barchart" class="barchart"><div style="position: absolute;right: 20px;top: 20px;cursor: pointer;"><div style="width: 50px;height: 50px;z-index:999999999;" id="hide"><svg width="30" height="30" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 2.14275L12.857 0L7.5 5.35725L2.14275 0L0 2.14275L5.357 7.5L0 12.8573L2.14275 15L7.5 9.64275L12.857 15L15 12.8573L9.6425 7.5L15 2.14275Z" fill="#E5E5E5"/></svg></div></div><div id="barchart_values" style="display:flex;align-items: center;justify-content: center;width: auto; height: 300px;"></div></div><div style="z-index:150;position: fixed;right: 20px;bottom: 20px;cursor: pointer;" id="show"><svg width="75" height="75" viewBox="0 0 75 75" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="37.5" cy="37.5" r="35" fill="#5C5A5B" stroke="#35373A" stroke-width="5"/><path d="M55.0072 55.5723V23.2681H43.2602V55.5723H37.3867V35.0151H25.6397V55.5723H21.2346V17.3946H18.2979V55.5723C18.2979 56.3512 18.6073 57.0981 19.158 57.6489C19.7088 58.1996 20.4557 58.509 21.2346 58.509H59.4123V55.5723H55.0072ZM34.45 55.5723H28.5765V37.9518H34.45V55.5723ZM52.0704 55.5723H46.1969V26.2048H52.0704V55.5723Z" fill="white"/></svg></div>';
 //barchart的css
 var barchart_css = document.createElement("style");
 barchart_css.innerHTML ='.barchart{  z-index:150; position: fixed;  right: 100px;  bottom: 100px;  background-color: rgba(0, 0, 0, 0.5);  transform: scale(0);  opacity:0;  transform-origin: bottom right;}.show{  -webkit-transition: 1s;  -moz-transition: 1s;  -ms-transition: 1s;  -o-transition: 1s;  transition: 1s;  opacity:1;  transform: scale(1)  !important;}.hide{  -webkit-transition: 1s;  -moz-transition: 1s;-ms-transition: 1s;  -o-transition: 1s;  transition: 1s; opacity:0;  transform: scale(0)  !important;}';
@@ -211,6 +211,10 @@ function start(name) {
     body.appendChild(barchart_css);
     body.appendChild(barchart);
     body.appendChild(insert_script);
+    document.querySelector('.U26fgb.JRY2Pb.mUbCce.kpROve.GaONte.Qwoy0d.ZPasfd.vzpHY').setAttribute('aria-disabled', true);
+    document.querySelector('.U26fgb.JRY2Pb.mUbCce.kpROve.GaONte.Qwoy0d.ZPasfd.vzpHY').setAttribute('data-tooltip', "請透過疫距數得結束課程");
+    document.querySelector('.U26fgb.JRY2Pb.mUbCce.kpROve.GaONte.Qwoy0d.ZPasfd.vzpHY').setAttribute('aria-label', "請透過疫距數得結束課程");
+    document.querySelector('.U26fgb.JRY2Pb.mUbCce.kpROve.GaONte.Qwoy0d.ZPasfd.vzpHY').style.background='#D0D0D0';
   }
 
 }
@@ -233,6 +237,8 @@ function end(){
         chrome.runtime.sendMessage({isClassing:false});
         barchart.remove();
         barchart_css.remove();
+        document.querySelector('.U26fgb.JRY2Pb.mUbCce.kpROve.GaONte.Qwoy0d.ZPasfd.vzpHY').setAttribute('aria-disabled', false);
+        document.querySelector('.U26fgb.JRY2Pb.mUbCce.kpROve.GaONte.Qwoy0d.ZPasfd.vzpHY').click();
     },
     error: function(XMLHttpRequest){
       console.log(XMLHttpRequest.responseText);
