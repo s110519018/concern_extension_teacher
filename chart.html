@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專注度時間對照表</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="chart.css">
+</head>
+<body>
+    <div class="container">
+        <div class="class">
+            <div id="loading_class"></div>
+            <button id="button_class"><a id="download_class">下載全班時間專注度對照表</a></button>
+            <div id="SteppedAreachart_values_class"></div>
+        </div>
+        <div class="student">
+            <div id="loading"></div>
+            <button><a id="download">下載</a></button>
+            <div id="SteppedAreachart_values_personal"></div>
+            <form name='form' id='form'>
+                學生姓名：
+                <input type='text' name='name' id='student_name' />
+                <input type='button' value='送出' data-action="submit"/>
+            </form>
+        </div>
+        
+        
+    </div>
+    <h1 id="error"style="color: red;"></h1>
+    <script src="chart.js"></script>
+</body>
+</html>

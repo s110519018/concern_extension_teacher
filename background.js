@@ -4,10 +4,21 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     // if (request.msg === "sendtoPOPUP") {
     //     sendResponse({isClassing: isClassing});
     // }
-    // else{
+    if (request.msg === "createWindow") {
+        chrome.windows.create({
+        url: "chart.html?classroomID=" + request.data.classroomID,
+        type: "popup",
+        width: 1000,
+        height: 800,
+        }, function (newWindow) {
+            console.log(newWindow);
+        });
+        console.log(request.data.classroomID+request.data.studentName);
+    }
+    else{
         console.log(request.isClassing);
         isClassing=request.isClassing;
-    // }
+    }
     
 });
 

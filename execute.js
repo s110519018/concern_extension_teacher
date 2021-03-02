@@ -241,6 +241,12 @@ function end(){
         barchart_css.remove();
         document.querySelector('.U26fgb.JRY2Pb.mUbCce.kpROve.GaONte.Qwoy0d.ZPasfd.vzpHY').setAttribute('aria-disabled', false);
         document.querySelector('.U26fgb.JRY2Pb.mUbCce.kpROve.GaONte.Qwoy0d.ZPasfd.vzpHY').click();
+        chrome.runtime.sendMessage({
+          msg: 'createWindow',
+          data:{
+            classroomID: window.location.pathname.substr(1)
+          }
+        });
     },
     error: function(XMLHttpRequest){
       console.log(XMLHttpRequest.responseText);
