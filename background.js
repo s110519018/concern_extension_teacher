@@ -8,7 +8,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         chrome.windows.create({
         url: "chart.html?classroomID=" + request.data.classroomID,
         type: "popup",
-        width: 1000,
+        width: 1200,
         height: 800,
         }, function (newWindow) {
             console.log(newWindow);

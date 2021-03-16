@@ -1,10 +1,53 @@
-const submitBtn = document.querySelector('[data-action="submit"]');
-submitBtn.addEventListener("click", processFormData);
+// const submitBtn = document.querySelector('[data-action="submit"]');
+// submitBtn.addEventListener("click", processFormData);
+//-----------------搜尋-------------------
+(function(document) {
+  'use strict'; //嚴謹模式
 
+  // 建立 LightTableFilter
+  var LightTableFilter = (function(Arr) {
+    var _input;
+
+    // 資料輸入事件處理函數
+    function _onInputEvent(e) {
+      _input = e.target;
+      var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+      Arr.forEach.call(tables, function(table) {
+        Arr.forEach.call(table.tBodies, function(tbody) {
+          Arr.forEach.call(tbody.rows, _filter);
+        });
+      });
+    }
+
+    // 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
+    function _filter(row) {
+      var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+      row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+    }
+
+    return {
+      // 初始化函數
+      init: function() {
+        var inputs = document.getElementsByClassName('light-table-filter');
+        Arr.forEach.call(inputs, function(input) {
+          input.oninput = _onInputEvent;
+        });
+      }
+    };
+  })(Array.prototype);
+
+  // 網頁載入完成後，啟動 LightTableFilter
+  document.addEventListener('readystatechange', function() {
+    if (document.readyState === 'complete') {
+      LightTableFilter.init();
+    }
+  });
+
+})(document);
+//-----------------圖表產生-------------------
 const url = new URL(window.location.href);
 console.log("classroomID: "+ url.searchParams.get('classroomID'));
 try {
-
     //------------------------------全班
     $.ajax({
         type:"POST",
@@ -25,43 +68,102 @@ try {
             $('#error').text("error錯誤，請按f5重新載入");  
         }
     });
+    $.ajax({
+      type:"POST",
+      contentType: 'application/json',
+      dataType: "json",
+      url: "https://concern-backendserver.herokuapp.com/api/teacher/getClassmatesList",
+      data: JSON.stringify({
+        "classroomID": "yju-iuag-yhw"
+      }),
+      success: function (msg) {
+        createClassList(msg);
+      },
+      error: function(error){
+        console.log(error.responseText);
+      }
+    });
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawChart_class);
+
 
 } catch (error) {
     console.log(error);
     $('.container').css('display', 'none');
     $('#error').text("error錯誤，請按f5重新載入");
 }
-function processFormData(e){
-    const form = document.forms['form'];
-    //取 elements 集合中 name 屬性為 name 的值
-    const name = form.elements.name.value;
-    $('#loading').css('display', 'block');
-    //之後圖片載入要用非同步!不然一定完蛋
-    $.ajax({
+// function processFormData(e){
+//     const form = document.forms['form'];
+//     //取 elements 集合中 name 屬性為 name 的值
+//     const name = form.elements.name.value;
+//     $('#loading').css('display', 'block');
+//     //之後圖片載入要用非同步!不然一定完蛋
+//     $.ajax({
+//         type:"POST",
+//         contentType: 'application/json',
+//         dataType: "json",
+//         url: "https://concern-backendserver.herokuapp.com/api/teacher/getPersonConcernDiagram",
+//         data: JSON.stringify({
+//         "classroomID": url.searchParams.get('classroomID'),
+//         "studentName": name,
+//         "timeSpacing":100
+//         }),
+//         success: function (msg) {
+//             console.log(msg);
+//             drawChart(msg);
+//         },
+//         error: function(error){
+//             console.log(error);
+//             $('#loading').css('display', 'none');
+//             $('.container').css('display', 'none');
+//             $('#error').text("error錯誤，請按f5重新載入");    
+//         }
+//     });
+//     google.charts.setOnLoadCallback(drawChart);
+// }
+//----------------------------------------
+function createClassList(ClassList){
+  var tbody_classlist=document.getElementById("classlist");
+  for(i=0;i<ClassList.NameList.length;i++){
+    //新增學生資料
+    var DataID = document.createElement('tr');
+    DataID.setAttribute("id",ClassList.DataIDList[i]);
+    DataID.setAttribute("class","tr_student");
+    var Name = document.createElement('td');
+    Name.textContent=ClassList.NameList[i];
+    DataID.appendChild(Name);
+    var studentID = document.createElement('td');
+    studentID .textContent=ClassList.IDList[i];
+    DataID.appendChild(studentID);
+    tbody_classlist.appendChild(DataID);
+  }
+  const cells = document.querySelectorAll('tr');
+  for (var i = 0; i < cells.length; i++) {
+    cells[i].addEventListener('click', (event) => {
+      console.log(event.target.parentNode.getAttribute('id')); 
+      $('#loading').css('display', 'block');
+      $.ajax({
         type:"POST",
         contentType: 'application/json',
         dataType: "json",
         url: "https://concern-backendserver.herokuapp.com/api/teacher/getPersonConcernDiagram",
         data: JSON.stringify({
-        "classroomID": url.searchParams.get('classroomID'),
-        "studentName": name,
-        "timeSpacing":100
+          "classroomID": "yju-iuag-yhw",
+          "DataID":event.target.parentNode.getAttribute('id'),
+          "timeSpacing":10
         }),
         success: function (msg) {
             console.log(msg);
             drawChart(msg);
         },
         error: function(error){
-            console.log(error);
-            $('#loading').css('display', 'none');
-            $('.container').css('display', 'none');
-            $('#error').text("error錯誤，請按f5重新載入");    
+          console.log(error)
         }
+      });
     });
-    google.charts.setOnLoadCallback(drawChart);
+  }
 }
+//學生個人圖
 function drawChart(results) {
     if(results==undefined){
         return
@@ -86,8 +188,8 @@ function drawChart(results) {
     var view = new google.visualization.DataView(data);
   var options = {
     title: results.studentName+"的專注度統計",
-    width: '1200px',
-    height: '400px',
+    width: '960px',
+    height: '1000px',
     backgroundColor: "white",
     legend: { position: "none" },
     titleTextStyle: {
@@ -100,7 +202,7 @@ function drawChart(results) {
       textStyle: {
         color: "black",
         fontSize: 12,
-        bold: true
+        bold: false
       },
       gridlines: {
         color: "#BEBEBE"
@@ -146,7 +248,7 @@ function drawChart(results) {
     chart.draw(view, options);
 }
 
-//------------------------------全班
+//全班圖
 function drawChart_class(results) {
 
     if(results==undefined){
@@ -180,7 +282,7 @@ function drawChart_class(results) {
     // }
   var options = {
     title: "全班專注度狀況分布 ",
-    width: '100%',
+    width: '1200px',
     height: '600',
     backgroundColor: "white",
     isStacked: 'percent',
@@ -259,5 +361,4 @@ function drawChart_class(results) {
     $('#error').text("error錯誤，請按f5重新載入");
   });
     chart.draw(view, options);
-
 }

@@ -17,14 +17,29 @@
             <div id="SteppedAreachart_values_class"></div>
         </div>
         <div class="student">
-            <div id="loading"></div>
-            <button><a id="download">下載</a></button>
-            <div id="SteppedAreachart_values_personal"></div>
-            <form name='form' id='form'>
+            <div class="classList">
+                搜尋：<input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
+                <table class="order-table" >
+                  <thead>
+                    <tr>
+                      <th>姓名</th>
+                      <th>學號</th>
+                    </tr>
+                  </thead>
+                  <tbody id="classlist">
+                  </tbody>
+                </table>
+                <div class="student_chart">
+                    <button><a id="download">下載</a></button>
+                    <div id="SteppedAreachart_values_personal"></div>
+                    <div id="loading"></div>            
+                </div>
+            </div>
+            <!-- <form name='form' id='form'>
                 學生姓名：
                 <input type='text' name='name' id='student_name' />
                 <input type='button' value='送出' data-action="submit"/>
-            </form>
+            </form> -->
         </div>
         
         

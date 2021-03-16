@@ -9,16 +9,18 @@ button{
 a{
     text-decoration:none;
 }
-.class,.student{
+.class{
     position: relative;
+    min-height: 500px;
+    width: 1200px;
 }
 #loading{
     display: none;
-    position: absolute;
+    /* position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
-    left: 0;
+    left: 0; */
     opacity: 1;
     z-index: 20;
     width: 100%;
@@ -26,6 +28,7 @@ a{
     background:url(https://i1.wp.com/cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif) center center no-repeat;
 }
 #loading_class{
+    /* display: none; */
     position: absolute;
     top: 0;
     right: 0;
@@ -36,4 +39,37 @@ a{
     width: 100%;
     height:100%; 
     background:url(https://i1.wp.com/cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif) center center no-repeat;
+}
+
+.light-table-filter{
+    display: block;
+}
+table{
+    border-collapse: collapse;
+    width: 180px;
+    height: 600px;
+    display: inline-block;
+    overflow-y: scroll;
+    box-sizing: border-box; 
+}
+td,th{
+    padding: 5px 5px;
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+    border-color: transparent;
+    border-bottom-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+}
+.tr_student:hover{
+    transition: 0.3s;
+    background-color: black;
+    color: white;
+}
+.student_chart{
+    width: 960px;
+    height: 200px;
+    display: inline-block;
+    vertical-align: top;
 }
