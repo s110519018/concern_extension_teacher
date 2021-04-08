@@ -10,15 +10,54 @@
     <link rel="stylesheet" href="chart.css">
 </head>
 <body>
+    <div class="parallax">
+        <img src="https://i.imgur.com/yl8MbId.png" alt="">
+    </div>
     <div class="container">
-        <div class="class">
+        <div class="teacher">
+            <li>全班時序表</li>
             <div id="loading_class"></div>
-            <button id="button_class"><a id="download_class">下載全班時間專注度對照表</a></button>
             <div id="SteppedAreachart_values_class"></div>
+            <button id="button_class"><a id="download_class">下載全班時間專注度對照表</a></button>
+        </div>
+        <div class="rank">
+            <li>專注度排行榜</li>
+            <table class="rank-table" >
+                <thead>
+                  <tr>
+                    <th>排名</th>
+                    <th>姓名</th>
+                    <th>學號</th>
+                  </tr>
+                </thead>
+                <tbody id="ranklist">
+                    <tr>
+                        <td>1</td>
+                        <td>李淯萱</td>
+                        <td>110934017</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>李淯萱</td>
+                        <td>110934017</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>李淯萱</td>
+                        <td>110934017</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>李淯萱</td>
+                        <td>110934017</td>
+                    </tr>
+                </tbody>
+              </table>
         </div>
         <div class="student">
+            <li>學生個別時序表</li>
+            <input type="search" class="light-table-filter" data-table="order-table" placeholder="搜尋姓名或學號....">
             <div class="classList">
-                搜尋：<input type="search" class="light-table-filter" data-table="order-table" placeholder="請輸入關鍵字">
                 <table class="order-table" >
                   <thead>
                     <tr>
@@ -30,21 +69,15 @@
                   </tbody>
                 </table>
                 <div class="student_chart">
-                    <button><a id="download">下載</a></button>
+                    <div id="loading"></div>           
                     <div id="SteppedAreachart_values_personal"></div>
-                    <div id="loading"></div>            
+                    <button><a id="download">下載</a></button> 
                 </div>
             </div>
-            <!-- <form name='form' id='form'>
-                學生姓名：
-                <input type='text' name='name' id='student_name' />
-                <input type='button' value='送出' data-action="submit"/>
-            </form> -->
         </div>
-        
-        
     </div>
     <h1 id="error"style="color: red;"></h1>
+    <footer>©2021 exCoDItension</footer>
     <script src="chart.js"></script>
 </body>
 </html>

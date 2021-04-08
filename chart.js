@@ -74,7 +74,7 @@ try {
       dataType: "json",
       url: "https://concern-backendserver.herokuapp.com/api/teacher/getClassmatesList",
       data: JSON.stringify({
-        "classroomID": "yju-iuag-yhw"
+        "classroomID": url.searchParams.get('classroomID')
       }),
       success: function (msg) {
         createClassList(msg);
@@ -190,7 +190,7 @@ function drawChart(results) {
     title: results.studentName+"的專注度統計",
     width: '960px',
     height: '1000px',
-    backgroundColor: "white",
+    backgroundColor: "#FAF9F9",
     legend: { position: "none" },
     titleTextStyle: {
       color: "black",
@@ -284,7 +284,7 @@ function drawChart_class(results) {
     title: "全班專注度狀況分布 ",
     width: '1200px',
     height: '600',
-    backgroundColor: "white",
+    backgroundColor: "#FAF9F9",
     isStacked: 'percent',
     // isStacked: true,
     legend: { position: "right" },

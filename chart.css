@@ -1,31 +1,97 @@
+/* *{
+    border: olive 1px solid;
+} */
+html,body{
+    margin: 0 0;
+    background-color: #FAF9F9;
+}
+.parallax{
+    text-align: center;
+}
+.parallax img{
+  width: 100%;
+}  
+  
+.container{
+    background-color: #FAF9F9;
+    padding-top: 50px;
+    position: relative;
+    padding-left: 6%;
+    padding-right: 6%;
+}
+.container::before{
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 0;
+    border-radius: 62px 62px 0% 0%;
+    width: 100%;
+    height: 50px;
+    background-color: #FAF9F9;
+}
 #download{
     border:0;
     outline: 0;
     cursor: pointer;  
 }
+li{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    color: #82A098;
+    list-style: none;
+    margin-bottom: 27px;
+}
+li::before{
+    content: "::"; 
+    color: #82A098;
+    display: inline-block; 
+    font-size: 30px;
+    width: 1em;
+    margin-left: -1em;
+}
 button{
     display: none;
+    border: none;
+    width: 320px;
+    height: 60px;
+    background-color: #82A098;
+    border-radius: 40px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    color: #FAF9F9;
+    margin: 36px auto;
 }
 a{
     text-decoration:none;
+    color: #FAF9F9;
 }
-.class{
+.teacher{
     position: relative;
     min-height: 500px;
-    width: 1200px;
+}
+.rank{
+    position: relative;
+    min-height: 500px;
 }
 #loading{
     display: none;
-    /* position: absolute;
+    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
-    left: 0; */
+    left: 0;
     opacity: 1;
     z-index: 20;
     width: 100%;
     height:100%; 
     background:url(https://i1.wp.com/cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif) center center no-repeat;
+
 }
 #loading_class{
     /* display: none; */
@@ -40,19 +106,70 @@ a{
     height:100%; 
     background:url(https://i1.wp.com/cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif) center center no-repeat;
 }
-
+.rank{
+    min-height: 400px;
+}
+.rank-table{
+    width: 100%;
+    box-sizing: border-box; 
+    border: #82A098 2px solid;
+    border-radius: 10px;
+    background-color: #82A098;
+}
+.rank-table td,.rank-table th{
+    padding: 5px 5px;
+    width: 100px;
+    cursor: pointer;
+    background-color: #82A098;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    color: #FFFFFF;
+}
 .light-table-filter{
     display: block;
+    width: 196px;
+    height: 44px;
+    margin-top: 27px;
+    margin-bottom: 20px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 10px rgba(130, 160, 152, 0.6);
+    border: none;
 }
-table{
+::placeholder { /* CSS 3 標準 */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #8B8B8B;
+}
+  
+::-webkit-input-placeholder { /* Chrome, Safari */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #8B8B8B;
+}
+input:focus{
+    outline: none;
+}
+.order-table{
     border-collapse: collapse;
-    width: 180px;
-    height: 600px;
+    width: 200px;
+    height: 350px;
     display: inline-block;
     overflow-y: scroll;
     box-sizing: border-box; 
+    border: #82A098 2px solid;
+    border-radius: 10px;
 }
-td,th{
+.order-table td,.order-table th{
     padding: 5px 5px;
     width: 100px;
     text-align: center;
@@ -61,15 +178,42 @@ td,th{
     border-bottom-style: hidden;
     border-right-style: hidden;
     border-left-style: hidden;
+    font-size: 14px;
+    line-height: 16px;
+    color: #82A098;
 }
-.tr_student:hover{
+.tr_student:hover td{
     transition: 0.3s;
-    background-color: black;
+    background-color: #82A098;
     color: white;
 }
+.classList{
+    position: relative;
+    margin-bottom: 80px;
+}
 .student_chart{
-    width: 960px;
-    height: 200px;
-    display: inline-block;
-    vertical-align: top;
+    position: absolute;
+    width: 82%;
+    /* max-width: 900px; */
+    /* width: calc(80% - 196px); */
+    /* margin-top: 50px; */
+    max-width: 960px;
+    min-height: 350px;
+    /* display: inline-block; */
+    /* vertical-align: top; */
+    top: 0;
+    left: 220px;
+}
+footer{
+    width: 100%;
+    height: 120px;
+    text-align: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    color: #FAF9F9;
+    line-height:120px;
+    background: #82A098 url(http://www.graphicartsunit.com/images/noise.png)
 }
