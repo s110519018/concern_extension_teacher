@@ -63,11 +63,11 @@ insert_script.innerHTML = 'var red_c=0; var green_c=0; var yellow_c=0;'+
                 'red_c+=1;'+
               '}'+
               'else if (r.newConcernDegree > 0.5 && r.newConcernDegree < 0.8) {'+
-                'video.parentElement.parentElement.style.border = "8px solid yellow";'+
+                'video.parentElement.parentElement.style.border = "4px solid yellow";'+
                 'yellow_c+=1'+
               '}'+
               'else if (r.newConcernDegree > 0.8) {'+
-                'video.parentElement.parentElement.style.border = "8px solid green";'+
+                'video.parentElement.parentElement.style.border = "4px solid green";'+
                 'green_c+=1'+
               '}'+
             '}'+

@@ -39,10 +39,10 @@ chrome.tabs.getSelected(null, getSelectedTab);
 chrome.runtime.onMessage.addListener(  
   function(request, sender, sendResponse) {   
     if (request.msg === "sendtoPOPUP") {
-      document.getElementById('loading').textContent="";
+      document.getElementById('loading').style.display='none';
       switch(request.data.isClassing){
         case 0:
-          document.getElementById('loading').textContent="loading...";
+          document.getElementById('loading').style.display='block';
           document.getElementById('is_classing').style.display='none';
           document.getElementById('not_classing').style.display='none';
           break;

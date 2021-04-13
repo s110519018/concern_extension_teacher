@@ -2,26 +2,27 @@
 <html style="width:200px;">
   <head>
     <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <title>疫距數得</title>
     <meta charset="UTF-8">
   </head>
 
   <body id="body">
     <div class="title">
-      <img src="../icon/icon.png" alt="">
-      <h2>疫距數得</h2>
+      <img src="https://i.imgur.com/fHm1vzK.png" alt="">
     </div>
-    <p id="loading">loading...</p>
+    <p id="loading"><i class="fas fa-spinner fa-spin"></i></p>
     <div id="not_classing">
       <input type="text" id="name" placeholder="請輸入Google帳號名字">
       <button id="start">開始上課</button>
     </div>
     <div id="is_classing">
-      <h2>上課中...</h2><br>
+      <div class="talk-bubble">
+        上課中...
+      </div>
       <button id="end">結束課程</button>
-      <!-- <button id="reload">重新載入</button> -->
     </div>
-    <button id="reload">若有問題，請關閉網頁並點此重新載入</button>
+    <button id="reload">若有問題，請關閉網頁再點此重載</button>
     <script src="./js/script.js"></script>
   </body>
 </html>
