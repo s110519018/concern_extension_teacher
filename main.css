@@ -105,4 +105,5 @@ button:focus{
   cursor: pointer;
   font-size:12px;
   transform: scale(0.916);/*11/12=0.916, font-size:11px*/
+  text-decoration: underline;
 }
