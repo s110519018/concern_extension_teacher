@@ -8,11 +8,12 @@ var insert_script = document.createElement("script");
 insert_script.innerHTML = `var red_c=0; var green_c=0; var yellow_c=0;
 
 var isClassing=false;
+var setTimeout_test;
 window.addEventListener("message",function(me) {  
       console.log("me.data.isClassing"+me.data.isClassing);
       if(me.data.isClassing){
         isClassing=me.data.isClassing;
-        setTimeout(StudentData, 1000);
+        setTimeout_test = setTimeout(StudentData, 1000);
       }
       else{isClassing=me.data.isClassing;}
 });
@@ -41,6 +42,7 @@ var StudentData = () => {
 
 
 function calltest(data) {
+  clearTimeout(setTimeout_test);
   console.log("calltest進入");
   console.log("data"+data+typeof(data));
 
@@ -88,6 +90,7 @@ function calltest(data) {
   google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
   setTimeout(StudentData, 1000);
+  setTimeout_test = setTimeout(StudentData, 1000);
 }
 
 function drawChart() {
