@@ -155,6 +155,7 @@ function createClassList(ClassList){
         success: function (msg) {
             console.log(msg);
             drawChart(msg);
+            google.charts.setOnLoadCallback(drawChart);
         },
         error: function(error){
           console.log(error)
