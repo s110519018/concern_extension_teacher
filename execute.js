@@ -89,7 +89,6 @@ function calltest(data) {
 
   google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
-  setTimeout(StudentData, 1000);
   setTimeout_test = setTimeout(StudentData, 1000);
 }
 
